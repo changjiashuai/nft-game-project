@@ -91,12 +91,12 @@ const App = () => {
         <div className="App">
             <div className="container">
                 <div className="header-container">
-                    <p className="header gradient-text">⚔️ Metaverse Slayer ⚔️</p>
-                    <p className="sub-text">Team up to protect the Metaverse!</p>
+                    <p className="header gradient-text">⚔️ Avengers Slayer ⚔️</p>
+                    <p className="sub-text">Team up to Avengers kill Boss.!</p>
                     <div className="connect-wallet-container">
                         <img
-                            src="https://64.media.tumblr.com/tumblr_mbia5vdmRd1r1mkubo1_500.gifv"
-                            alt="Monty Python Gif"
+                            src="https://44.media.tumblr.com/552c78035b27755554b441946102561d/fa206edb94446be4-b9/s540x810_f1/696d2298450ee27125f37a2484d8e421877fbd1c.gifv"
+                            alt="THE AVENGERS Gif"
                         />
                         {/*
                           * Button that we will use to trigger wallet connect
