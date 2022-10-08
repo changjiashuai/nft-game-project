@@ -3,6 +3,7 @@ import {ethers} from 'ethers';
 import {CONTRACT_ADDRESS, transformCharacterData} from '../../constants';
 import myEpicGame from '../../utils/MyEpicGame.json';
 import './Arena.css';
+import LoadingIndicator from "../LoadingIndicator";
 
 const Arena = ({currentAccount, characterNFT, setCharacterNFT}) => {
     // State
@@ -17,6 +18,8 @@ const Arena = ({currentAccount, characterNFT, setCharacterNFT}) => {
     */
     const [attackState, setAttackState] = useState('');
 
+    const [showToast, setShowToast] = useState(false);
+
     const runAttackAction = async () => {
         try {
             if (gameContract) {
@@ -26,6 +29,14 @@ const Arena = ({currentAccount, characterNFT, setCharacterNFT}) => {
                 await attackTxn.wait();
                 console.log('attackTxn:', attackTxn);
                 setAttackState('hit');
+
+                /*
+                 * Set your toast state to true and then false 5 seconds later
+                 */
+                setShowToast(true);
+                setTimeout(() => {
+                    setShowToast(false);
+                }, 5000);
             }
         } catch (error) {
             console.error('Error attacking boss:', error);
@@ -105,6 +116,12 @@ const Arena = ({currentAccount, characterNFT, setCharacterNFT}) => {
 
     return (
         <div className="arena-container">
+            {boss && characterNFT && (
+                <div id="toast" className={showToast ? 'show' : ''}>
+                    <div id="desc">{`💥 ${boss.name} was hit for ${characterNFT.attackDamage}!`}</div>
+                </div>
+            )}
+
             {/* Boss */}
             {boss && (
                 <div className="boss-container">
@@ -117,12 +134,23 @@ const Arena = ({currentAccount, characterNFT, setCharacterNFT}) => {
                                 <p>{`${boss.hp} / ${boss.maxHp} HP`}</p>
                             </div>
                         </div>
+
+                        <div className="stats">
+                            <h4>{`⚔️ Attack Damage: ${boss.attackDamage}`}</h4>
+                        </div>
                     </div>
                     <div className="attack-container">
                         <button className="cta-button" onClick={runAttackAction}>
                             {`💥 Attack ${boss.name}`}
                         </button>
                     </div>
+
+                    {attackState === 'attacking' && (
+                        <div className="loading-indicator">
+                            <LoadingIndicator />
+                            <p>Attacking ⚔️</p>
+                        </div>
+                    )}
                 </div>
             )}
 
