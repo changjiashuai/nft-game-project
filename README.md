@@ -10,8 +10,10 @@ Try running some of the following tasks:
 https://nft-game-project.jiashuaichang.repl.co/
 ```
 
-### Screenshot
+### Contract
+[Contract](https://github.com/changjiashuai/epic-game)
 
+### Screenshot
 ![运行截图](imgs/s1.png)
 
 ![运行截图](imgs/s2.png)
